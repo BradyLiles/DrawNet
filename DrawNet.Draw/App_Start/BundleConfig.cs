@@ -25,6 +25,8 @@ namespace DrawNet.Draw
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/helpers.css",
+                      "~/Content/sprites.css",
                       "~/Content/site.css"));
         }
     }

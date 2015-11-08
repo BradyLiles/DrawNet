@@ -8,14 +8,24 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body>
+<body style="background-color: #294072;">
 <div class="container body-content">
+    <div class="row">
+        <div class="col-md-4 col-centered">
+            <img src="~/Content/images/branding/Branding_246x37.png" class="bottom-buffer-15"/>
+            <div class="col-md-12" style="background-color: #013852; color: white;">
+                @RenderBody()
+                <hr/>
+                <footer style="font-size: 12px">
+                    <p>DrawNet™ supports the latest versions of Internet Explorer, Firefox, Safari, Opera, and Google Chrome. This application is optimized for use with IE 11.</p>
+                    <p>DrawNet™ does not guarantee this application will function as desired on browsers that are not listed below and are not up to date. Please make sure you are using the most updated version of your browser.</p>
+                    <img src="~/Content/images/blank.gif" class="BrowserIcons_24"/>
 
-    @RenderBody()
-    <hr/>
-    <footer>
-        <p>&copy; @DateTime.Now.Year - DrawNet</p>
-    </footer>
+                    <p class="top-buffer-10 text-center">&copy; @DateTime.Now.Year - DrawNet</p>
+                </footer>
+            </div>
+        </div>
+    </div>
 </div>
 
     @Scripts.Render("~/bundles/jquery")
