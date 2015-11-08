@@ -8,8 +8,9 @@
 <div class="row" style="background-color: #0e1e3f; border-bottom: 1px solid #0c1d3f">
     <h3 class="text-center text-bold vertical-buffer-10">@ViewBag.Title</h3>
 </div>
-<div class="row" style="padding: 0 20px 0 20px;">
+<div class="row" style="padding: 10px 20px 0 20px;">
     <section id="loginForm">
+        <p>If you have an account with us, please sign in.</p>
 
         @using (Html.BeginForm("Login", "Account", new {ReturnUrl = ViewBag.ReturnUrl}, FormMethod.Post, new { role = "form"}))
         {
@@ -43,13 +44,7 @@
 
 
 </div>
-<div class="row">
 
-</div>
-
-<div class="row">
-
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
