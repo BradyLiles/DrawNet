@@ -9,20 +9,24 @@
 
 
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-color: #294072;">
 <div class="login-box">
-    <div class="login-logo">
-        
-        <a href="../../index2.html"><b>Draw</b>Net</a>
+    <div class="login-logo" >
+        <img src="~/Content/images/branding/Branding_246x37.png" />
     </div><!-- /.login-logo -->
-    <div>
-        
-    </div>
-    <div class="row">
-        <h3 class="text-center vertical-buffer-10 account-page-title">@ViewBag.Title</h3>
+    <div class="login-box-header" style="background-color: #182F63; padding: 12px; color: white;">
+        <h3 class="text-center vertical-buffer-0">@ViewBag.Title</h3>
     </div>
     <div class="login-box-body">
         @RenderBody()
+        <hr/>
+        <footer style="font-size: 12px">
+            <p>DrawNet™ supports the latest versions of Internet Explorer, Firefox, Safari, Opera, and Google Chrome. This application is optimized for use with IE 11.</p>
+            <p>DrawNet™ does not guarantee this application will function as desired on browsers that are not listed below and are not up to date. Please make sure you are using the most updated version of your browser.</p>
+            <img src="~/Content/images/blank.gif" class="BrowserIcons_24"/>
+
+            <p class="top-buffer-10 text-center">&copy; @DateTime.Now.Year - DrawNet</p>
+        </footer>
     </div><!-- /.login-box-body -->
 </div><!-- /.login-box -->
 

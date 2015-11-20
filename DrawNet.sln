@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawNet.Inspect", "DrawNet.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawNet.Draw", "DrawNet.Draw\DrawNet.Draw.csproj", "{A5EFDAAA-8E73-4020-831A-2F923389196D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawNet.DataContext", "DrawNet.DataContext\DrawNet.DataContext.csproj", "{7FD7F663-3364-4C1C-BB2E-66497A0FEA06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A5EFDAAA-8E73-4020-831A-2F923389196D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5EFDAAA-8E73-4020-831A-2F923389196D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5EFDAAA-8E73-4020-831A-2F923389196D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FD7F663-3364-4C1C-BB2E-66497A0FEA06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FD7F663-3364-4C1C-BB2E-66497A0FEA06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FD7F663-3364-4C1C-BB2E-66497A0FEA06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FD7F663-3364-4C1C-BB2E-66497A0FEA06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
