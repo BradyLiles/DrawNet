@@ -5,16 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DrawNetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
-          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -67,6 +57,24 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lkp_UserInvite_Role">
+          <Key>
+            <PropertyRef Name="UserInvite_Role_ID" />
+          </Key>
+          <Property Name="UserInvite_Role_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserInvite_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AspNetRole_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_UserInvite">
+          <Key>
+            <PropertyRef Name="UserInvite_ID" />
+          </Key>
+          <Property Name="UserInvite_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="InviteCode" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SentDate" Type="datetime" Nullable="false" />
+          <Property Name="ExpireDate" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -124,13 +132,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_lkp_UserInvite_Role_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+          <End Role="lkp_UserInvite_Role" Type="Self.lkp_UserInvite_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="lkp_UserInvite_Role">
+              <PropertyRef Name="AspNetRole_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lkp_UserInvite_Role_tbl_UserInvite">
+          <End Role="tbl_UserInvite" Type="Self.tbl_UserInvite" Multiplicity="1" />
+          <End Role="lkp_UserInvite_Role" Type="Self.lkp_UserInvite_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_UserInvite">
+              <PropertyRef Name="UserInvite_ID" />
+            </Principal>
+            <Dependent Role="lkp_UserInvite_Role">
+              <PropertyRef Name="UserInvite_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DrawNetModelStoreContainer">
-          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lkp_UserInvite_Role" EntityType="Self.lkp_UserInvite_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_UserInvite" EntityType="Self.tbl_UserInvite" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -147,21 +180,19 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_lkp_UserInvite_Role_AspNetRoles" Association="Self.FK_lkp_UserInvite_Role_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="lkp_UserInvite_Role" EntitySet="lkp_UserInvite_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lkp_UserInvite_Role_tbl_UserInvite" Association="Self.FK_lkp_UserInvite_Role_tbl_UserInvite">
+            <End Role="tbl_UserInvite" EntitySet="tbl_UserInvite" />
+            <End Role="lkp_UserInvite_Role" EntitySet="lkp_UserInvite_Role" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DrawNetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -169,6 +200,7 @@
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+          <NavigationProperty Name="lkp_UserInvite_Role" Relationship="DrawNetModel.FK_lkp_UserInvite_Role_AspNetRoles" FromRole="AspNetRole" ToRole="lkp_UserInvite_Role" />
         </EntityType>
         <EntityType Name="AspNetUserClaim">
           <Key>
@@ -246,7 +278,6 @@
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
         </Association>
         <EntityContainer Name="DrawNetEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
@@ -263,23 +294,68 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="lkp_UserInvite_Role" EntityType="DrawNetModel.lkp_UserInvite_Role" />
+          <EntitySet Name="tbl_UserInvite" EntityType="DrawNetModel.tbl_UserInvite" />
+          <AssociationSet Name="FK_lkp_UserInvite_Role_AspNetRoles" Association="DrawNetModel.FK_lkp_UserInvite_Role_AspNetRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="lkp_UserInvite_Role" EntitySet="lkp_UserInvite_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lkp_UserInvite_Role_tbl_UserInvite" Association="DrawNetModel.FK_lkp_UserInvite_Role_tbl_UserInvite">
+            <End Role="tbl_UserInvite" EntitySet="tbl_UserInvite" />
+            <End Role="lkp_UserInvite_Role" EntitySet="lkp_UserInvite_Role" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="lkp_UserInvite_Role">
+          <Key>
+            <PropertyRef Name="UserInvite_Role_ID" />
+          </Key>
+          <Property Name="UserInvite_Role_ID" Type="Guid" Nullable="false" />
+          <Property Name="UserInvite_ID" Type="Guid" Nullable="false" />
+          <Property Name="AspNetRole_ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetRole" Relationship="DrawNetModel.FK_lkp_UserInvite_Role_AspNetRoles" FromRole="lkp_UserInvite_Role" ToRole="AspNetRole" />
+          <NavigationProperty Name="tbl_UserInvite" Relationship="DrawNetModel.FK_lkp_UserInvite_Role_tbl_UserInvite" FromRole="lkp_UserInvite_Role" ToRole="tbl_UserInvite" />
+        </EntityType>
+        <EntityType Name="tbl_UserInvite">
+          <Key>
+            <PropertyRef Name="UserInvite_ID" />
+          </Key>
+          <Property Name="UserInvite_ID" Type="Guid" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="InviteCode" Type="Guid" Nullable="false" />
+          <Property Name="SentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpireDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="lkp_UserInvite_Role" Relationship="DrawNetModel.FK_lkp_UserInvite_Role_tbl_UserInvite" FromRole="tbl_UserInvite" ToRole="lkp_UserInvite_Role" />
+        </EntityType>
+        <Association Name="FK_lkp_UserInvite_Role_AspNetRoles">
+          <End Type="DrawNetModel.AspNetRole" Role="AspNetRole" Multiplicity="1" />
+          <End Type="DrawNetModel.lkp_UserInvite_Role" Role="lkp_UserInvite_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="lkp_UserInvite_Role">
+              <PropertyRef Name="AspNetRole_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lkp_UserInvite_Role_tbl_UserInvite">
+          <End Type="DrawNetModel.tbl_UserInvite" Role="tbl_UserInvite" Multiplicity="1" />
+          <End Type="DrawNetModel.lkp_UserInvite_Role" Role="lkp_UserInvite_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_UserInvite">
+              <PropertyRef Name="UserInvite_ID" />
+            </Principal>
+            <Dependent Role="lkp_UserInvite_Role">
+              <PropertyRef Name="UserInvite_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DrawNetModelStoreContainer" CdmEntityContainer="DrawNetEntities">
-          <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="DrawNetModel.C__MigrationHistory">
-              <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="DrawNetModel.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
@@ -335,6 +411,26 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="lkp_UserInvite_Role">
+            <EntityTypeMapping TypeName="DrawNetModel.lkp_UserInvite_Role">
+              <MappingFragment StoreEntitySet="lkp_UserInvite_Role">
+                <ScalarProperty Name="AspNetRole_ID" ColumnName="AspNetRole_ID" />
+                <ScalarProperty Name="UserInvite_ID" ColumnName="UserInvite_ID" />
+                <ScalarProperty Name="UserInvite_Role_ID" ColumnName="UserInvite_Role_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_UserInvite">
+            <EntityTypeMapping TypeName="DrawNetModel.tbl_UserInvite">
+              <MappingFragment StoreEntitySet="tbl_UserInvite">
+                <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="InviteCode" ColumnName="InviteCode" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserInvite_ID" ColumnName="UserInvite_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

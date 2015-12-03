@@ -4,15 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bb4e6f260e724d4886ddc8cec5d09cd8" Name="Diagram1">
-        <EntityTypeShape EntityType="DrawNetModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DrawNetModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+      <Diagram DiagramId="bb4e6f260e724d4886ddc8cec5d09cd8" Name="Diagram1" ZoomLevel="109">
+        <EntityTypeShape EntityType="DrawNetModel.AspNetRole" Width="1.5" PointX="0.5" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DrawNetModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="DrawNetModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DrawNetModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
         <AssociationConnector Association="DrawNetModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="DrawNetModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="DrawNetModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DrawNetModel.lkp_UserInvite_Role" Width="1.5" PointX="0.5" PointY="5.125" />
+        <EntityTypeShape EntityType="DrawNetModel.tbl_UserInvite" Width="1.5" PointX="0.5" PointY="7.875" />
+        <AssociationConnector Association="DrawNetModel.FK_lkp_UserInvite_Role_AspNetRoles" />
+        <AssociationConnector Association="DrawNetModel.FK_lkp_UserInvite_Role_tbl_UserInvite" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -12,20 +12,20 @@ namespace DrawNet.Core
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetRole
+    public partial class tbl_UserInvite
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AspNetRole()
+        public tbl_UserInvite()
         {
-            this.AspNetUsers = new HashSet<AspNetUser>();
             this.lkp_UserInvite_Role = new HashSet<lkp_UserInvite_Role>();
         }
     
-        public string Id { get; set; }
-        public string Name { get; set; }
+        public System.Guid UserInvite_ID { get; set; }
+        public string Email { get; set; }
+        public System.Guid InviteCode { get; set; }
+        public System.DateTime SentDate { get; set; }
+        public System.DateTime ExpireDate { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<lkp_UserInvite_Role> lkp_UserInvite_Role { get; set; }
     }
