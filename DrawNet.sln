@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawNet.Core", "DrawNet.Core\DrawNet.Core.csproj", "{741E187E-6E79-4ECE-8A99-2F9EA6C8BA18}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawNet.Draw", "DrawNet.Draw\DrawNet.Draw.csproj", "{A5EFDAAA-8E73-4020-831A-2F923389196D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawNet.DataContext", "DrawNet.DataContext\DrawNet.DataContext.csproj", "{7FD7F663-3364-4C1C-BB2E-66497A0FEA06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawNet.Draw.Core", "DrawNet.Draw.Core\DrawNet.Draw.Core.csproj", "{D73DE62F-113E-4608-B148-7D0C1BE58296}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{7FD7F663-3364-4C1C-BB2E-66497A0FEA06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FD7F663-3364-4C1C-BB2E-66497A0FEA06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FD7F663-3364-4C1C-BB2E-66497A0FEA06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D73DE62F-113E-4608-B148-7D0C1BE58296}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D73DE62F-113E-4608-B148-7D0C1BE58296}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D73DE62F-113E-4608-B148-7D0C1BE58296}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D73DE62F-113E-4608-B148-7D0C1BE58296}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

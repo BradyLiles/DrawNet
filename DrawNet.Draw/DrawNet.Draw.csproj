@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -2428,11 +2429,29 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\images\credit\" />
     <Folder Include="Scripts\pages\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DrawNet.Core\DrawNet.Core.csproj">
+      <Project>{741e187e-6e79-4ece-8a99-2f9ea6c8ba18}</Project>
+      <Name>DrawNet.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DrawNet.DataContext\DrawNet.DataContext.csproj">
+      <Project>{7fd7f663-3364-4c1c-bb2e-66497a0fea06}</Project>
+      <Name>DrawNet.DataContext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DrawNet.Draw.Core\DrawNet.Draw.Core.csproj">
+      <Project>{d73de62f-113e-4608-b148-7d0c1be58296}</Project>
+      <Name>DrawNet.Draw.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

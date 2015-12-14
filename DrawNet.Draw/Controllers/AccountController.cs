@@ -9,6 +9,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using DrawNet.Draw.Models;
+using System.Net.Mail;
+using System.Text;
+using System.Net;
+using DrawNet.Draw.Core.Services.Email.Models;
 
 namespace DrawNet.Draw.Controllers
 {
@@ -205,19 +209,25 @@ namespace DrawNet.Draw.Controllers
                 var user = await UserManager.FindByNameAsync(model.Email);
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
-                    // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
                 }
 
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                ResetPasswordEmail resetPasswordEmail = new ResetPasswordEmail
+                {
+                    FullName = user.UserName,
+                    CompanyImageUrl = @"https://ea.twimg.com/email/self_serve/media/logo-1400528502322.png",
+                    CompanyName = "Twitter",
+                    PasswordResetUrl = Url.Action( "ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme )
+                };
+
+                var emailBody = DrawNet.Draw.Core.Services.Email.EmailService.PasswordResetEmail( resetPasswordEmail );
+                new DrawNet.Core.Utilities.Emailer().SendEmail(user.Email, "Reset Password", emailBody );
+
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
