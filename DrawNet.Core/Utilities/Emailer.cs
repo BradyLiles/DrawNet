@@ -26,8 +26,6 @@ namespace DrawNet.Core.Utilities
                 IsBodyHtml = IsHtml
             };
 
-
-
             var smtpClient = new SmtpClient(SmtpHostName, SmtpPort)
             {
                 EnableSsl = EnableSsl,

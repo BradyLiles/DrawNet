@@ -1,1 +1,22 @@
-﻿
+﻿@using DrawNet.Core
+@Model = InviteUserModel
+
+
+<div>
+    <label>
+        <span>Email: </span>
+        <input type="email" placeholer="Email"/>
+        @{
+            using (var ctx = new DrawNetEntities())
+            {
+                foreach (var role in ctx.AspNetRoles)
+                {
+                    <label>
+                        <span>@role.Name</span>
+                        <input type="checkbox" value="@role.Id" />
+                    </label>
+                }
+            }
+        }
+    </label>
+</div>
